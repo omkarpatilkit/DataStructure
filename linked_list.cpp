@@ -4,7 +4,8 @@ using namespace std;
 struct node
 {
     int data;
-    struct node *Next;
+    struct node *Next; //for this use struct node as it is inside
+    // and not yet declared
 };
 
 node *insertAtFirst(node *Head, int n)
