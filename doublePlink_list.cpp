@@ -21,6 +21,14 @@ void insertFirstEle(node **Head, int n)
     }
 }
 
+void insertAtFirst(node **Head, int n)
+{
+    node *ptr = (node *)malloc(sizeof(node));
+    ptr->data = n;
+    ptr->Next = *Head;
+    *Head = ptr;
+}
+
 void insertAtLast(node **Head, int n)
 {
     node *ptr = *Head;
@@ -61,6 +69,8 @@ int main()
     insertFirstEle(&First, 60);
     printList(First);
     insertAtLast(&First, 40);
+    printList(First);
+    insertAtFirst(&First, 10);
     printList(First);
     return 0;
 }
