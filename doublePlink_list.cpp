@@ -29,6 +29,14 @@ void insertAtFirst(node **Head, int n)
     *Head = ptr;
 }
 
+void deleteFirst(node **Head)
+{
+    node *ptr = *Head;
+    *Head = ptr->Next;
+    ptr->Next = NULL;
+    free(ptr);
+}
+
 void insertAtLast(node **Head, int n)
 {
     node *ptr = *Head;
@@ -50,6 +58,30 @@ void insertAtLast(node **Head, int n)
     ptr->Next = newn;
 }
 
+void deleteLast(node **Head)
+{
+    node *ptr = *Head;
+    while (ptr->Next->Next != NULL)
+    {
+        ptr = ptr->Next;
+    }
+    node *temp = (node *)malloc(sizeof(node));
+    temp = ptr->Next;
+    ptr->Next = NULL;
+    free(temp);
+}
+
+int LenList(node *Head)
+{
+    int cnt = 0;
+    while (Head != NULL)
+    {
+        cnt++;
+        Head = Head->Next;
+    }
+    return cnt;
+}
+
 printList(node *Head)
 {
     while (Head != NULL)
@@ -59,11 +91,13 @@ printList(node *Head)
     }
     printf("\n");
 }
+
 int main()
 {
     node *First = (node *)malloc(sizeof(node));
     First->Next = NULL;
     First->data = 1;
+    int Length = 0;
 
     printList(First);
     insertFirstEle(&First, 60);
@@ -72,5 +106,11 @@ int main()
     printList(First);
     insertAtFirst(&First, 10);
     printList(First);
+    Length = LenList(First);
+    deleteFirst(&First);
+    printList(First);
+    deleteLast(&First);
+    printList(First);
+    printf("Length of list was %d: ", Length);
     return 0;
 }
