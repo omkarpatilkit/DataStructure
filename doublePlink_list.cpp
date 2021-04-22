@@ -92,12 +92,73 @@ printList(node *Head)
     printf("\n");
 }
 
+void insertAtPos(node **Head, int n, int k)
+{
+    int Len = 0;
+    Len = LenList(*Head);
+    if (k > (Len + 1))
+    {
+        printf("please enter valid no. ");
+        return;
+    }
+    else if (k == 0 || k == 1)
+    {
+        insertAtFirst(Head, n);
+    }
+    else if (k == (Len + 1))
+    {
+        insertAtLast(Head, n);
+    }
+    else if (k == 2)
+    {
+        node *ptr = *Head;
+        node *newn = (node *)malloc(sizeof(node));
+        node *temp = (node *)malloc(sizeof(node));
+        temp = ptr->Next;
+        ptr->Next = newn;
+        newn->data = n;
+        newn->Next = temp;
+        // free(temp);
+    }
+    else
+    {
+        node *ptr = *Head;
+        for (int i = 0; i < (k - 1); i++)
+        {
+            ptr = ptr->Next;
+        }
+        node *temp = (node *)malloc(sizeof(node));
+        temp = ptr->Next;
+        node *newn = (node *)malloc(sizeof(node));
+        ptr->Next = newn;
+        newn->data = n;
+        newn->Next = temp;
+        //free(temp);
+        //free(ptr);
+    }
+}
+
+int Freqof(node *Head, int n)
+{
+    int cnt = 0;
+    while (Head->Next != NULL)
+    {
+        if (Head->data == n)
+        {
+            cnt++;
+        }
+        Head = Head->Next;
+    }
+    return cnt;
+}
+
 int main()
 {
     node *First = (node *)malloc(sizeof(node));
     First->Next = NULL;
     First->data = 1;
     int Length = 0;
+    int f30 = 0;
 
     printList(First);
     insertFirstEle(&First, 60);
@@ -106,11 +167,20 @@ int main()
     printList(First);
     insertAtFirst(&First, 10);
     printList(First);
+
+    insertAtPos(&First, 30, 2);
+    printList(First);
+    insertAtPos(&First, 100, 2);
+    insertAtPos(&First, 30, 4);
+    printList(First);
+    f30 = Freqof(First, 30);
+    printf("frqency of 30  is: %d\n", f30);
+
     Length = LenList(First);
     deleteFirst(&First);
     printList(First);
     deleteLast(&First);
     printList(First);
-    printf("Length of list was %d: ", Length);
+    printf("Length of list was: %d\n", Length);
     return 0;
 }
