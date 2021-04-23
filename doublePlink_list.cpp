@@ -152,6 +152,38 @@ int Freqof(node *Head, int n)
     return cnt;
 }
 
+void delePertEle(node **Head, int n)
+{
+    node *ptr = *Head;
+    node *check = *Head;
+    check = check->Next;
+    while ((ptr->Next != NULL) && (check != NULL))
+    {
+
+        if ((ptr->data) == n)
+        {
+            *Head = ptr->Next;
+            return;
+        }
+
+        if ((check->data) == n)
+        {
+
+            if (check->Next == NULL)
+            {
+                deleteLast(Head);
+            }
+            else
+            {
+
+                ptr->Next = check->Next;
+            }
+        }
+        ptr = ptr->Next;
+        check = check->Next;
+    }
+}
+
 int main()
 {
     node *First = (node *)malloc(sizeof(node));
@@ -180,6 +212,8 @@ int main()
     deleteFirst(&First);
     printList(First);
     deleteLast(&First);
+    printList(First);
+    delePertEle(&First, 100);
     printList(First);
     printf("Length of list was: %d\n", Length);
     return 0;
