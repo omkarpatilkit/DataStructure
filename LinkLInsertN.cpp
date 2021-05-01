@@ -127,6 +127,35 @@ void deleteAt(node **Head, int pos)
     free(temp);
 }
 
+void deleteNum(node **Head, int n)
+{
+    node *prev = new node;
+    node *curr = *Head;
+    node *after = (*Head)->next;
+    node *temp = NULL;
+
+    while (after != NULL)
+    {
+        if (curr->data == n)
+        {
+            prev->next = after;
+
+            temp = curr;
+            free(temp);
+
+            curr = after;
+            after = after->next;
+        }
+
+        else
+        {
+            prev = curr;
+            curr = curr->next;
+            after = after->next;
+        }
+    }
+}
+
 void printList(node **Head)
 {
     node *ptr = *Head;
@@ -147,8 +176,12 @@ int main()
     InsertAtFirst(&First, 40);
     InsertAtFirst(&First, 30);
     InsertAtFirst(&First, 20);
+    InsertAtFirst(&First, 20);
+    InsertAtFirst(&First, 20);
     InsertAtFirst(&First, 10);
 
+    InsertAtLast(&First, 90);
+    InsertAtLast(&First, 90);
     InsertAtLast(&First, 90);
     InsertAtLast(&First, 100);
     InsertAtLast(&First, 110);
@@ -158,5 +191,11 @@ int main()
 
     deleteAt(&First, 5);
     printList(&First);
+
+    deleteNum(&First, 90);
+    printList(&First);
+    deleteNum(&First, 20);
+    printList(&First);
+
     return 0;
 }
