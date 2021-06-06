@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-class SinglyLl
+class DoublyLl
 {
 
 private:
@@ -21,7 +21,7 @@ private:
 
 public:
     int iValue = 0, iCount = 0;
-    SinglyLl()
+    DoublyLl()
     {
         Head = NULL;
         iSize = 0;
@@ -37,7 +37,7 @@ public:
     int Count();
 };
 
-void SinglyLl::InsertAtFirst(int no)
+void DoublyLl::InsertAtFirst(int no)
 {
     NodePtr newn = NULL;
     newn = new Node;
@@ -59,7 +59,7 @@ void SinglyLl::InsertAtFirst(int no)
     iSize++;
 }
 
-void SinglyLl::InsertAtLast(int no)
+void DoublyLl::InsertAtLast(int no)
 {
     NodePtr newn = new Node;
     newn->data = no;
@@ -85,7 +85,7 @@ void SinglyLl::InsertAtLast(int no)
     iSize++;
 }
 
-void SinglyLl::DeleteAtFirst()
+void DoublyLl::DeleteAtFirst()
 {
     if (Head == NULL)
     {
@@ -106,7 +106,7 @@ void SinglyLl::DeleteAtFirst()
     }
 }
 
-void SinglyLl::DeleteAtLast()
+void DoublyLl::DeleteAtLast()
 {
     if (Head == NULL)
     {
@@ -130,7 +130,7 @@ void SinglyLl::DeleteAtLast()
     }
 }
 
-void SinglyLl::InsertAtPosition(int no, int pos)
+void DoublyLl::InsertAtPosition(int no, int pos)
 {
     //int iSize = this->Count;
     if (pos == 1)
@@ -167,7 +167,7 @@ void SinglyLl::InsertAtPosition(int no, int pos)
     }
 }
 
-void SinglyLl::DeleteAtPosition(int pos)
+void DoublyLl::DeleteAtPosition(int pos)
 {
     //int iSize = this->Count;
     if (pos == 1)
@@ -200,7 +200,7 @@ void SinglyLl::DeleteAtPosition(int pos)
     }
 }
 
-void SinglyLl::Display()
+void DoublyLl::Display()
 {
     NodePtr temp = Head;
     while (temp != NULL)
@@ -212,7 +212,7 @@ void SinglyLl::Display()
     cout << iSize << " Number of elements in List" << '\n';
 }
 
-int SinglyLl::Count()
+int DoublyLl::Count()
 {
     return iSize;
 }
@@ -220,7 +220,7 @@ int SinglyLl::Count()
 int main()
 {
     int iChoice = 1, iNo = 0, iRet = 0, iPos = 0;
-    SinglyLl List1;
+    DoublyLl List1;
 
     while (iChoice != 0)
     {
