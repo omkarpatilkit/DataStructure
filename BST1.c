@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 typedef struct node
 {
@@ -98,12 +99,46 @@ int Count(NodePtr Head)
     return iCnt;
 }
 
+bool Search(NodePtr Head, int no)
+{
+    NodePtr temp = Head;
+    if (Head == NULL)
+    {
+        printf("Tree is Empty\n");
+        return false;
+    }
+    else
+    {
+        while (1)
+        {
+            if (temp == NULL)
+            {
+                return false;
+            }
+            else if (no > temp->data)
+            {
+                temp = temp->rChild;
+            }
+            else if (no < temp->data)
+            {
+                temp = temp->lChild;
+            }
+
+            else if (no == temp->data)
+            {
+                return true;
+            }
+        }
+    }
+}
+
 int main()
 {
 
     NodePtr root = NULL;
 
     int iChoice = 1, iNo = 0, iRet = 0;
+    bool bRet = false;
 
     while (iChoice != 0)
     {
@@ -116,6 +151,7 @@ int main()
         printf("4 : Display Postorder\n");
         printf("5 : Count nodes\n");
         printf("6 : For all Orders at once\n");
+        printf("7 :Enter number to search\n");
         printf("0 : Terminate the appplication\n");
 
         scanf("%d", &iChoice);
@@ -159,6 +195,21 @@ int main()
             printf("this is by PostOrder: ");
             PostOrder(root);
             printf("\n");
+            break;
+
+        case 7:
+            printf("Enter the number to search:\n");
+            scanf("%d", &iNo);
+            bRet = Search(root, iNo);
+            if (bRet == true)
+            {
+                printf("%d present in BST\n", iNo);
+            }
+            else
+            {
+                printf("%d is not present in BST\n", iNo);
+            }
+            break;
 
         case 0:
             printf("Thank you for using appplication\n");
