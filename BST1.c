@@ -99,6 +99,34 @@ int Count(NodePtr Head)
     return iCnt;
 }
 
+int NumberOfParent(NodePtr Head)
+{
+    static int iCnt = 0;
+    if (Head != NULL)
+    {
+        if (Head->lChild != NULL || Head->rChild != NULL)
+        {
+            iCnt++;
+        }
+        NumberOfParent(Head->lChild);
+        NumberOfParent(Head->rChild);
+        return iCnt;
+    }
+}
+
+void NumberOfLeaf(NodePtr Head, int *p)
+{
+    if (Head != NULL)
+    {
+        if (Head->lChild == NULL && Head->rChild == NULL)
+        {
+            (*p)++; //
+        }
+        NumberOfLeaf(Head->lChild, p);
+        NumberOfLeaf(Head->rChild, p);
+    }
+}
+
 bool Search(NodePtr Head, int no)
 {
     NodePtr temp = Head;
@@ -137,7 +165,7 @@ int main()
 
     NodePtr root = NULL;
 
-    int iChoice = 1, iNo = 0, iRet = 0;
+    int iChoice = 1, iNo = 0, iRet = 0, i;
     bool bRet = false;
 
     while (iChoice != 0)
@@ -151,7 +179,9 @@ int main()
         printf("4 : Display Postorder\n");
         printf("5 : Count nodes\n");
         printf("6 : For all Orders at once\n");
-        printf("7 :Enter number to search\n");
+        printf("7 : Enter number to search\n");
+        printf("8 : Count the number of parents\n");
+        printf("9 : Count the number of leaf\n");
         printf("0 : Terminate the appplication\n");
 
         scanf("%d", &iChoice);
@@ -209,6 +239,17 @@ int main()
             {
                 printf("%d is not present in BST\n", iNo);
             }
+            break;
+
+        case 8:
+            iRet = NumberOfParent(root);
+            printf("Number of parents are %d\n", iRet);
+            break;
+
+        case 9:
+            i = 0;
+            NumberOfLeaf(root, &i);
+            printf("Number of leaves are %d\n", i);
             break;
 
         case 0:
